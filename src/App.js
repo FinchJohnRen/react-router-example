@@ -5,7 +5,7 @@ import ParamsExample from './components/UrlParameters';
 import CustomLink from './components/CustomLink';
 import Auth from './components/Auth';
 import NoMatchExample from './components/NoMatch';
-// import RecursivePaths from './components/RecursivePaths';
+import StaticRouter from './components/StaticRouter';
 import './App.css';
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
         <hr/>
         <NoMatchExample/>
         <hr/>
-        {/* <RecursivePaths/> */}
+        <StaticRouter/>
         <hr/>
       </div>
     );  
