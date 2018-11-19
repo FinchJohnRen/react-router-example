@@ -1,50 +1,76 @@
-import React from 'react';
-import { BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
-const Home = () => <h1>Home</h1>;
-const About = () => <h1>About</h1>;
+function ParamsExample({ location }) {
+  let params = new URLSearchParams(location.search);
 
-const Header = () => (
-  <nav>
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/about">About</Link></li>
-      <li><Link to="/topics">Topics</Link></li>
-    </ul>
-  </nav>
-)
+  return (
+    <Router>
+      <p>
+        React Router does not have any opinions about how your parse URL query
+        strings. Some applications use simple key=value query strings, but
+        others embed arrays and objects in the query string. So it's up to you
+        to parse the search string yourself.
+      </p>
+      <p>
+        In modern browsers that support{" "}
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL">
+          the URL API
+        </a>
+        , you can instantiate a <code>URLSearchParams</code> object from{" "}
+        <code>location.search</code> and use that.
+      </p>
+      <p>
+        In{" "}
+        <a href="https://caniuse.com/#feat=url">
+          browsers that do not support the URL API (read: IE)
+        </a>{" "}
+        you can use a 3rd party library such as{" "}
+        <a href="https://github.com/sindresorhus/query-string">query-string</a>.
+      </p>
+      <div>
+        <h2>Accounts</h2>
+        <ul>
+          <li>
+            <Link to={{ pathname: "/account", search: "?name=netflix" }}>
+              Netflix
+            </Link>
+          </li>
+          <li>
+            <Link to={{ pathname: "/account", search: "?name=zillow-group" }}>
+              Zillow Group
+            </Link>
+          </li>
+          <li>
+            <Link to={{ pathname: "/account", search: "?name=yahoo" }}>
+              Yahoo
+            </Link>
+          </li>
+          <li>
+            <Link to={{ pathname: "/account", search: "?name=modus-create" }}>
+              Modus Create
+            </Link>
+          </li>
+        </ul>
 
-const Topic = ({match}) => <h3>Requested param: {match.params.id}</h3> 
-const Topics = ({match}) => (
-  <div>
-    <h3>Topics</h3>
-    <ul>
-      <li><Link to={`${match.url}/component`}>Components</Link></li>
-      <li><Link to={`${match.url}/props-v-state`}>props-v-state</Link></li>
-    </ul>
-    
-    <Route 
-      exact
-      path={match.url}
-      render={ () => <h3>this is default route page, Please select a topic.</h3> }
-    />
-    <Route
-      path={`${match.url}/:id`}
-      component={Topic}
-    />
-  </div>
-)
+        <Child name={params.get("name")} />
+      </div>
+    </Router>
+  );
+}
 
-const AppRouter1 = () => (
-  <Router>
+function Child({ name }) {
+  return (
     <div>
-      <Header/>
-
-      <Route exact path="/" component={Home}></Route>
-      <Route path="/about" component={About}></Route>
-      <Route path="/topics" component={Topics}></Route>
+      {name ? (
+        <h3>
+          The <code>name</code> in the query string is "{name}"
+        </h3>
+      ) : (
+        <h3>There is no name in the query string</h3>
+      )}
     </div>
-  </Router>
-)
+  );
+}
 
-export default AppRouter1
+export default ParamsExample;

@@ -6,6 +6,7 @@ import CustomLink from './components/CustomLink';
 import Auth from './components/Auth';
 import NoMatchExample from './components/NoMatch';
 import StaticRouter from './components/StaticRouter';
+import ParamsExm from './components/queryParams';
 import './App.css';
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
         <hr/>
         <StaticRouter/>
         <hr/>
+        <ParamsExm/>
       </div>
     );  
   }
